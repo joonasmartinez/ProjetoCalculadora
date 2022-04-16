@@ -87,7 +87,6 @@ class  CalcController {
         }else if(this._operation.lenght == 3){
 
             this._lastNumber = this.getLastItem(false); 
-            console.log("lastnumber 2: "+this._lastNumber)
         }
         console.log(this._operation)
         console.log("lastnumber: "+this._lastNumber)
@@ -126,14 +125,9 @@ class  CalcController {
 
     setLastNumberToDisplay(){
 
-        let lastNumber;
+        let lastNumber = this.getLastItem(false);
 
-        for(let i = this._operation.length-1; i >= 0; i--){
-            if(!this.isOperator(this._operation[i])){
-                lastNumber = this._operation[i];
-                break;
-            }
-        }
+        if(!lastNumber) lastNumber = 0;
 
         this.displayCalc = lastNumber;
     }
