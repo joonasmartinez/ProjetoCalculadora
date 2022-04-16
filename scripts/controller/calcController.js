@@ -80,11 +80,11 @@ class  CalcController {
         this._lastOperator = this.getLastItem();
 
         if(this._operation.length > 3){
-
             last = this._operation.pop();
+
             this._lastNumber = this.getResult();
 
-        }else if(this._operation.lenght == 3){
+        }else if(this._operation.length == 3){
 
             this._lastNumber = this.getLastItem(false); 
         }
@@ -113,7 +113,7 @@ class  CalcController {
 
         let lastItem;
 
-        for(let i = this._operation.length-1; i >= 0; i--){
+        for(let i = this._operation.length - 1; i >= 0; i--) {
 
             if(this.isOperator(this._operation[i]) == isOperator){
                 lastItem = this._operation[i];
