@@ -35,6 +35,8 @@ class  CalcController {
 
     clearAll(){
         this._operation = ["0"];
+        this._lastNumber = '';
+        this._lastOperator = '';
         this.setLastNumberToDisplay();
     }
 
@@ -120,7 +122,7 @@ class  CalcController {
         for(let i = this._operation.length - 1; i >= 0; i--) {
 
             if(this.isOperator(this._operation[i]) == isOperator){
-                lastItem = this._operation[i];
+                lastItem = this._operation[i]; 
                 break;
             }
         }
@@ -158,16 +160,30 @@ class  CalcController {
     }else{
         if(this.isOperator(value)){
             this.pushOperation(value);
-        }else if(isNaN(value)){
-            console.log("Igual ou ponto acionado.")
         }else{
             let newValue = this.getLastOperation().toString() + value.toString();
-            this.setLastOperation(parseInt(newValue));
+            this.setLastOperation(newValue);
 
             this.setLastNumberToDisplay();
         }
         
     }
+}
+
+addDot(){
+
+    let lastOperation = this.getLastOperation();
+
+    if(typeof lastOperation === 'string' && lastOperation.split('').indexOf(".") > -1) return;
+
+    if(this.isOperator(lastOperation) || !lastOperation){
+
+        this.pushOperation("0.")
+
+    }else {
+        this.setLastOperation(lastOperation.toString() + '.');
+    }
+    this.setLastNumberToDisplay();
 }
 
     execBtn(value){
@@ -206,7 +222,7 @@ class  CalcController {
                 break;
 
             case 'ponto':
-                this.addOperation(".");
+                this.addDot();
 
                 break;
 
