@@ -176,8 +176,11 @@ class  CalcController {
     }
 
     getResult(){
-
-        return eval(this._operation.join(""));
+        try{
+            return eval(this._operation.join(""));
+        }catch(e){
+            this.setError(); //Não vai aparecer o erro. Apenas para ilustração. (Para aparecer deve executar com SetTimeOut)
+        }
     }
 
     calc(){
@@ -411,6 +414,11 @@ addDot(){
     }
 
     set displayCalc(value){
+
+        if(value.toString().length > 10){
+            this.setError();
+            return false;
+        }
         this._displayCalcEl.innerHTML = value;
     }
 
